@@ -1,6 +1,6 @@
 package com.jantox.joker
 
-trait Ordering[O] {
+trait Ordering[O] extends Eq[O] {
   def eq(a: O, b: O): Boolean
   def lt(a: O, b: O): Boolean
   def lte(a: O, b: O): Boolean
