@@ -11,7 +11,7 @@ object Fix {
   }
 
   // ana :: (b -> f b) -> b -> Fix f
-  // ana z b = Fix (fmap (ana z) (b z))
+  // ana z b = Fix $ fmap (ana z) (z b)
   def ana[F[_]: Functor, B](z: B => F[B])(b: B): Fix[F] = {
     Fix[F](implicitly[Functor[F]].map(ana(z))(z(b)))
   }
