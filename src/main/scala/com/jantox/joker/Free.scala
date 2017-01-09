@@ -1,7 +1,9 @@
 package com.jantox.joker
 
 sealed trait Free[F[_], A]
+
 final case class WrapF[F[_], A](f: F[Free[F, A]]) extends Free[F, A]
+
 final case class ReturnF[F[_], A](a: A) extends Free[F, A]
 
 object Free {
