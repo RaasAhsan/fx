@@ -6,7 +6,7 @@ trait Show[A] {
 
 object Show {
 
-  implicit object ShowCofunctor extends Cofunctor[Show] {
+  implicit object ShowContravariant$ extends Contravariant[Show] {
     override def cofmap[A, B](f: A => B)(s: Show[B]): Show[A] = new Show[A] {
       override def show(a: A): String = {
         s.show(f(a))
