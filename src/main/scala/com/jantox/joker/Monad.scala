@@ -1,10 +1,19 @@
 package com.jantox.joker
 
-trait Monad[M[_]] extends Functor[M] {
-  def returnM[A](a: A): M[A]
-  def flatMap[A, B](f: A => M[B])(ma: M[A]): M[B]
+import com.jantox.joker.Applicative
 
-  def map[A, B](f: A => B)(fa: M[A]): M[B] = {
-    flatMap[A, B](a => returnM(f(a)))(fa)
+trait Monad[F[_]] extends Applicative[F] {
+  
+  def point[A](a: A): F[A]
+  
+  def flatMap[A, B](a: F[A])(f: A => F[B]): F[B]
+
+  override def pure[A](a: A): F[A] = {
+    point(a)
   }
+
+  override def ap[A, B](a: F[A])(f: F[A => B]): F[B] = {
+    flatMap(a)(va => flatMap(f)(vf => point(vf(va))))
+  }
+
 }

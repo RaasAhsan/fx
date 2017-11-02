@@ -10,7 +10,7 @@ trait Ordering[O] extends Eq[O] {
 
 object Ordering {
 
-  implicit object OrderingContravariant$ extends Contravariant[Ordering] {
+  implicit object OrderingContravariant extends Contravariant[Ordering] {
     override def cofmap[A, B](f: A => B)(o: Ordering[B]): Ordering[A] = new Ordering[A] {
       override def eq(a: A, b: A): Boolean = {
         o.eq(f(a), f(b))

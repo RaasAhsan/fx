@@ -16,12 +16,14 @@ object Free {
   }
 
   implicit def freeMonad[F[_]: Functor]() = new Monad[({type f[x] = Free[F, x]})#f] {
-    override def returnM[A](a: A): Free[F, A] = ???
 
-    override def flatMap[A, B](f: A => Free[F, B])(ma: Free[F, A]): Free[F, B] = ma match {
-      case WrapF(wrapped) => WrapF(implicitly[Functor[F]].map((freeA: Free[F, A]) => flatMap(f)(freeA))(wrapped))
+    override def point[A](a: A): Free[F, A] = ReturnF(a)
+
+    override def flatMap[A, B](ma: Free[F, A])(f: A => Free[F, B]): Free[F, B] = ma match {
+      case WrapF(wrapped) => WrapF(implicitly[Functor[F]].map((freeA: Free[F, A]) => flatMap(freeA)(f))(wrapped))
       case ReturnF(a) => f(a)
     }
+
   }
 
 }
