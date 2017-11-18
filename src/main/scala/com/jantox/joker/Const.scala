@@ -1,12 +1,19 @@
 package com.jantox.joker
 
-final case class Const[A, B](a: A)
+final case class Const[A, B](a: A) {
+
+  def map[C](f: B => C): Const[A, C] = {
+    Const(a)
+  }
+
+}
 
 object Const {
 
-  implicit def constFunctor[T] = new Functor[({type f[x] = Const[T, x]})#f] {
-    override def map[A, B](f: (A) => B)(a: Const[T, A]): Const[T, B] = {
-      Const(a.a)
+  implicit def constFunctor[A] = new Functor[({type f[x] = Const[A, x]})#f] {
+    override def map[B, C](f: B => C)(a: Const[A, B]): Const[A, C] = {
+      a.map(f)
     }
   }
+
 }

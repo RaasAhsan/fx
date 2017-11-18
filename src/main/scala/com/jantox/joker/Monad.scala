@@ -1,7 +1,5 @@
 package com.jantox.joker
 
-import com.jantox.joker.Applicative
-
 trait Monad[F[_]] extends Applicative[F] {
   
   def point[A](a: A): F[A]
