@@ -1,4 +1,4 @@
-package com.jantox.joker
+package fx
 
 trait Monad[F[_]] extends Applicative[F] {
   

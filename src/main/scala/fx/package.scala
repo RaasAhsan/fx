@@ -1,6 +1,4 @@
-package com.jantox
-
-package object joker {
+package object fx {
 
   type Id[A] = A
   type ~>[F[_], G[_]] = NaturalTransformation[F, G]

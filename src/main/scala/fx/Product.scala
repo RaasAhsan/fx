@@ -1,4 +1,4 @@
-package com.jantox.joker
+package fx
 
 final case class Product[F[_], G[_], A](f: F[A], g: G[A]) {
 

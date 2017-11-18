@@ -1,4 +1,4 @@
-package com.jantox.joker
+package fx
 
 trait Eq[-A] {
 

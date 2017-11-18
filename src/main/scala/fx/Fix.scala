@@ -1,4 +1,4 @@
-package com.jantox.joker
+package fx
 
 final case class Fix[F[_]](f: F[Fix[F]])
 

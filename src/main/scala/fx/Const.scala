@@ -1,4 +1,4 @@
-package com.jantox.joker
+package fx
 
 final case class Const[A, B](a: A) {
 

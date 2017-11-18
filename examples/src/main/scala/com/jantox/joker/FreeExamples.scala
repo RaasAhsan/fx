@@ -1,5 +1,7 @@
 package com.jantox.joker
 
+import fx.{Free, Functor, Pure, Suspend}
+
 object FreeExamples {
 
   type Language[A] = Free[LanguageA, A]

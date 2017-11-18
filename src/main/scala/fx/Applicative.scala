@@ -1,5 +1,8 @@
-package com.jantox.joker
+package fx
 
+/**
+  * Created by mahsan on 11/17/17.
+  */
 trait Applicative[F[_]] extends Apply[F] {
 
   def pure[A](a: A): F[A]

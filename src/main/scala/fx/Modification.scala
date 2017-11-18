@@ -1,4 +1,4 @@
-package com.jantox.joker
+package fx
 
 trait Modification[M1[_], M2[_], N1[_], N2[_]] {
 

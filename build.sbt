@@ -1,13 +1,19 @@
 import sbt.Keys._
 
-lazy val root = (project in file("."))
+lazy val fx = (project in file("."))
   .settings(
-    name := "joker",
-    organization := "com.jantox",
+    name := "fx",
+    organization := "com.webdation",
     version := "0.1.0",
 
     scalaVersion := "2.12.3",
-    scalacOptions += "-deprecation",
+    scalacOptions ++= Seq(
+      "-deprecation",
+      "-feature",
+      "-language:higherKinds",
+      "-language:implicitConversions",
+      "-unchecked"
+    ),
 
     scalacOptions in Test ++= Seq("-Yrangepos"),
 
@@ -19,7 +25,7 @@ lazy val root = (project in file("."))
 lazy val jokeson = (project in file("./jokeson"))
   .settings(
     name := "joker",
-    organization := "com.jantox",
+    organization := "com.webdation",
     version := "0.1.0",
 
     scalaVersion := "2.12.3",
@@ -34,8 +40,8 @@ lazy val jokeson = (project in file("./jokeson"))
 
 lazy val examples = (project in file("./examples"))
   .settings(
-    name := "joker-examples",
-    organization := "com.jantox",
+    name := "fx-examples",
+    organization := "com.webdation",
     version := "0.1.0",
 
     scalaVersion := "2.12.3",
@@ -43,4 +49,4 @@ lazy val examples = (project in file("./examples"))
 
     scalacOptions in Test ++= Seq("-Yrangepos")
   )
-  .dependsOn(root)
+  .dependsOn(fx)

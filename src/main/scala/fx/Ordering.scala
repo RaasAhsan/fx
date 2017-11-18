@@ -1,4 +1,4 @@
-package com.jantox.joker
+package fx
 
 trait Ordering[A] extends Eq[A] { self =>
   def eq(a: A, b: A): Boolean
