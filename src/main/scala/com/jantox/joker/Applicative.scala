@@ -1,10 +1,8 @@
 package com.jantox.joker
 
-trait Applicative[F[_]] extends Functor[F] {
+trait Applicative[F[_]] extends Apply[F] {
 
   def pure[A](a: A): F[A]
-
-  def ap[A, B](a: F[A])(f: F[A => B]): F[B]
 
   override def map[A, B](f: A => B)(a: F[A]): F[B] = {
     ap(a)(pure(f))
