@@ -18,14 +18,14 @@ final case class Pure[F[_], A](a: A) extends Free[F, A]
 
 object Free {
 
-  implicit def freeFunctor[F[_]: Functor] = new Functor[({type f[x] = Free[F, x]})#f] {
+  implicit def freeFunctor[F[_]: Functor] = new Functor[Free[F, ?]] {
     def map[A, B](f: A => B)(fa: Free[F, A]): Free[F, B] = fa match {
       case Suspend(wrapped) => Suspend(implicitly[Functor[F]].map((freeA: Free[F, A]) => map(f)(freeA))(wrapped))
       case Pure(a) => Pure(f(a))
     }
   }
 
-  implicit def freeMonad[F[_]: Functor] = new Monad[({type f[x] = Free[F, x]})#f] {
+  implicit def freeMonad[F[_]: Functor] = new Monad[Free[F, ?]] {
 
     override def point[A](a: A): Free[F, A] = Pure(a)
 

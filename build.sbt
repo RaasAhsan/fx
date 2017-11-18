@@ -9,7 +9,11 @@ lazy val root = (project in file("."))
     scalaVersion := "2.12.3",
     scalacOptions += "-deprecation",
 
-    scalacOptions in Test ++= Seq("-Yrangepos")
+    scalacOptions in Test ++= Seq("-Yrangepos"),
+
+    libraryDependencies ++= Seq(
+      compilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
+    )
   )
 
 lazy val jokeson = (project in file("./jokeson"))

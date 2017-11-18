@@ -18,7 +18,7 @@ final case class InR[F[_], G[_], A](r: G[A]) extends Coproduct[F, G, A] {
 
 object Coproduct {
 
-  implicit def coproductFunctor[F[_]: Functor, G[_]: Functor]() = new Functor[({type f[x] = Coproduct[F, G, x]})#f] {
+  implicit def coproductFunctor[F[_]: Functor, G[_]: Functor]() = new Functor[Coproduct[F, G, ?]] {
     def map[A, B](f: A => B)(fa: Coproduct[F, G, A]): Coproduct[F, G, B] = {
       fa.map(f)
     }

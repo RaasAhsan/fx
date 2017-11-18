@@ -10,7 +10,7 @@ final case class Const[A, B](a: A) {
 
 object Const {
 
-  implicit def constFunctor[A] = new Functor[({type f[x] = Const[A, x]})#f] {
+  implicit def constFunctor[A] = new Functor[Const[A, ?]] {
     override def map[B, C](f: B => C)(a: Const[A, B]): Const[A, C] = {
       a.map(f)
     }

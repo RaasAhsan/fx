@@ -10,7 +10,7 @@ final case class Product[F[_], G[_], A](f: F[A], g: G[A]) {
 
 object Product {
 
-  implicit def productFunctor[F[_]: Functor, G[_]: Functor]() = new Functor[({type f[x] = Product[F, G, x]})#f] {
+  implicit def productFunctor[F[_]: Functor, G[_]: Functor]() = new Functor[Product[F, G, ?]] {
     override def map[A, B](f: A => B)(fa: Product[F, G, A]): Product[F, G, B] = {
       fa.map(f)
     }
