@@ -1,6 +1,7 @@
 package com.jantox.joker
 
-import fx.{Free, Functor, Pure, Suspend}
+import fx.free.{Free, Pure, Suspend}
+import fx.Functor
 
 object FreeExamples {
 

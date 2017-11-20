@@ -1,4 +1,6 @@
-package fx
+package fx.data
+
+import fx.Functor
 
 sealed trait Coproduct[F[_], G[_], A] {
   def map[B](f: A => B)(implicit F: Functor[F], G: Functor[G]): Coproduct[F, G, B]

@@ -1,4 +1,6 @@
-package fx
+package fx.data
+
+import fx._
 
 object Id {
 

@@ -14,16 +14,6 @@ trait MonoidInstances {
 
   }
 
-  implicit def stringMonoid: Monoid[String] = new Monoid[String] {
-
-    override def zero: String = ""
-
-    override def add(a: String, b: String): String = {
-      a + b
-    }
-
-  }
-
   implicit def listMonoid[A]: Monoid[List[A]] = new Monoid[List[A]] {
 
     override def zero: List[A] = List()

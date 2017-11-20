@@ -1,4 +1,6 @@
-package fx
+package fx.data
+
+import fx.Functor
 
 final case class Fix[F[_]](f: F[Fix[F]])
 

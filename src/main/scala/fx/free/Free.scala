@@ -1,4 +1,6 @@
-package fx
+package fx.free
+
+import fx.{Functor, Monad}
 
 sealed trait Free[F[_], A] {
 

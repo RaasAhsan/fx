@@ -1,4 +1,6 @@
-package fx
+package fx.data
+
+import fx.Functor
 
 final case class Product[F[_], G[_], A](f: F[A], g: G[A]) {
 
