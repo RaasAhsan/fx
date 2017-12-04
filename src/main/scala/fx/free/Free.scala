@@ -20,6 +20,10 @@ final case class Pure[F[_], A](a: A) extends Free[F, A]
 
 object Free {
 
+//  def liftF[F[_], A](fa: F[A]): Free[F, A] = {
+//    Suspend()
+//  }
+
   implicit def freeFunctor[F[_]: Functor] = new Functor[Free[F, ?]] {
     def map[A, B](f: A => B)(fa: Free[F, A]): Free[F, B] = fa match {
       case Suspend(wrapped) => Suspend(implicitly[Functor[F]].map((freeA: Free[F, A]) => map(f)(freeA))(wrapped))

@@ -6,4 +6,6 @@ package object instances {
 
   object string extends StringInstances
 
+  object option extends OptionInstances
+
 }
