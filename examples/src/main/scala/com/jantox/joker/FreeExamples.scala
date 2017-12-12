@@ -1,11 +1,11 @@
 package com.jantox.joker
 
-import fx.free.{Free, Pure, Suspend}
+import fx.free.{FreeC2$, Pure, Suspend}
 import fx.Functor
 
 object FreeExamples {
 
-  type Language[A] = Free[LanguageA, A]
+  type Language[A] = FreeC2[LanguageA, A]
 
   sealed trait LanguageA[A]
   final case class Alert[A](message: String, next: A) extends LanguageA[A]

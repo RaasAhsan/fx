@@ -14,6 +14,7 @@ trait Coyoneda[F[_], A] { self =>
   def fs: F[Rep]
   def k: Rep => A
 
+  // map is just function composition.
   def map[B](f: A => B): Coyoneda[F, B] = new Coyoneda[F, B] {
     override type Rep = self.Rep
 
@@ -21,7 +22,7 @@ trait Coyoneda[F[_], A] { self =>
     override def k: Rep => B = self.k.andThen(f)
   }
 
-  def mapF[G[_]](f: F ~> G): Coyoneda[G, A] = new Coyoneda[G, A] {
+  def mapK[G[_]](f: F ~> G): Coyoneda[G, A] = new Coyoneda[G, A] {
     override type Rep = self.Rep
 
     override def fs: G[Rep] = f.apply(self.fs)
@@ -51,5 +52,11 @@ object Coyoneda {
 //    new NaturalTransformation[({type f[x] = Coyoneda[F, x]})#f, ({type g[x] = Coyoneda[G, x]})#g] {
 //
 //    }
+
+  implicit def coyonedaFunctor[F[_]]: Functor[Coyoneda[F, ?]] = new Functor[Coyoneda[F, ?]] {
+    def map[A, B](f: A => B)(fa: Coyoneda[F, A]): Coyoneda[F, B] = {
+      fa.map(f)
+    }
+  }
 
 }
