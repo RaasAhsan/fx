@@ -43,15 +43,15 @@ object Coyoneda {
   }
 
   // Yoneda reduction. This is the only place where F is required to be a functor.
+  // If F is a functor, Coyoneda[F, A] is isomorphic to F[A]
   def lowerCoyoneda[F[_]: Functor, A](coyo: Coyoneda[F, A]): F[A] = {
     implicitly[Functor[F]].map(coyo.k)(coyo.fs)
   }
 
-  // hoistCoyoneda lifts a natural transformation F ~> G to Coyoneda[F, ?] ~> Coyoneda[G, ?]
-//  def hoistCoyoneda[F[_], G[_], A](f: F ~> G): NaturalTransformation[({type f[x] = Coyoneda[F, x]})#f, ({type g[x] = Coyoneda[G, x]})#g] =
-//    new NaturalTransformation[({type f[x] = Coyoneda[F, x]})#f, ({type g[x] = Coyoneda[G, x]})#g] {
-//
-//    }
+  // hoistCoyoneda lifts a natural transformation F ~> G to Coyoneda[F, ?] -> Coyoneda[G, ?]
+  def hoistCoyoneda[F[_], G[_], A](f: F ~> G)(coyo: Coyoneda[F, A]): Coyoneda[G, A] = {
+    coyo.mapK(f)
+  }
 
   implicit def coyonedaFunctor[F[_]]: Functor[Coyoneda[F, ?]] = new Functor[Coyoneda[F, ?]] {
     def map[A, B](f: A => B)(fa: Coyoneda[F, A]): Coyoneda[F, B] = {

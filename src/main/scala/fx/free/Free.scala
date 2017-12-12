@@ -1,6 +1,6 @@
 package fx.free
 
-import fx.Functor
+import fx.{Functor, ~>}
 
 sealed trait Free[F[_], A] { self =>
 
